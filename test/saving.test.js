@@ -1,10 +1,16 @@
 const MarioChar = require('../models/mariochar');
-require('./connection');
-
-// jest.setTimeout(100000);
+const mongoose = require('./connection');
 
 describe("Saving records", () => {
-  // afterEach(() => mockgoose.helper.reset());
+
+  beforeEach((done) => {
+    mongoose.connection.collections.mariochars.drop(() => {
+      done();
+    }
+    );
+  });
+
+  afterAll(() => mongoose.disconnect());
 
   it('Saves a record to the database', () => {
     let char = new MarioChar({
@@ -16,7 +22,4 @@ describe("Saving records", () => {
     });
 
   });
-
-  afterAll(() => mongoose.disconnect());
-
-})
+});
