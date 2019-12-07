@@ -1,0 +1,24 @@
+{
+  "name": "MongoDB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariusParasca/mongoDB-play.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MariusParasca/mongoDB-play/issues"
+  },
+  "homepage": "https://github.com/MariusParasca/mongoDB-play#readme",
+  "dependencies": {
+    "jest": "^24.9.0",
+    "mongoose": "^5.7.13"
+  }
+}
