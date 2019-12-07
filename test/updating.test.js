@@ -1,7 +1,7 @@
 const MarioChar = require('../models/mariochar');
 let mongoose;
 
-describe("Deleting records", () => {
+describe("Updating records", () => {
   beforeAll(() => {
     mongoose = require('../connection');
   });
@@ -17,10 +17,10 @@ describe("Deleting records", () => {
     return char.save();
   });
 
-  it('Delete one record from the database', () => {
-    return MarioChar.findOneAndRemove({ name: 'Mario' }).then(() => {
-      return MarioChar.findOne({ name: 'Mario' }).then((result) => {
-        expect(result).toEqual(null);
+  it('Update one record from the database', () => {
+    return MarioChar.findOneAndUpdate({ name: 'Mario' }, { name: 'Luigi' }).then(() => {
+      return MarioChar.findById(char._id).then((result) => {
+        expect(result.name).toEqual('Luigi');
       });
     });
   });
