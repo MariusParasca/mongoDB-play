@@ -11,7 +11,8 @@ describe("Updating records", () => {
   beforeEach(() => {
     mongoose.connection.collections.mariochars.drop();
     char = new MarioChar({
-      name: "Mario"
+      name: "Mario",
+      weight: 50
     });
 
     return char.save();
@@ -23,6 +24,14 @@ describe("Updating records", () => {
         expect(result.name).toEqual('Luigi');
       });
     });
+  });
+
+  it('Increments the weight by 1', () => {
+    return MarioChar.update({}, { $inc: { weight: 1 } }).then(() => {
+      return MarioChar.findById(char._id).then((result) => {
+        expect(result.weight).toEqual(char.weight + 1);
+      });
+    })
   });
 
 });
