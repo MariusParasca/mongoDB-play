@@ -1,17 +1,20 @@
 const MarioChar = require('../models/mariochar');
-const mongoose = require('./connection');
+let mongoose;
 
 describe("Saving records", () => {
 
-  beforeEach((done) => {
-    mongoose.connection.collections.mariochars.drop(() => {
-      done();
-    }
-    );
+  beforeAll(() => {
+    mongoose = require('../connection');
+  })
+
+  beforeEach(() => {
+    mongoose.connection.collections.mariochars.drop();
+    let char = new MarioChar({
+      name: "Mario"
+    });
+
+    return char.save();
   });
-
-  afterAll(() => mongoose.disconnect());
-
   it('Saves a record to the database', () => {
     let char = new MarioChar({
       name: "Mario"
@@ -20,6 +23,5 @@ describe("Saving records", () => {
     return char.save().then(() => {
       expect(char.isNew).toBe(false);
     });
-
   });
 });
